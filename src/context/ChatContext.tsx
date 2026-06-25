@@ -37,7 +37,8 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
     const saved = localStorage.getItem('wizy_chat_history');
     if (saved) {
       try {
-        const parsed = JSON.parse(saved);
+        const parsed = JSON.parse(saved) as ChatMessage[];
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setMessages(parsed);
       } catch (e) {
         console.error('Error loading chat history', e);

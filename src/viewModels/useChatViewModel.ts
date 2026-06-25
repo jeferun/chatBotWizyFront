@@ -36,8 +36,12 @@ export const useChatViewModel = () => {
         timestamp: new Date(),
       };
       addMessage(botMessage);
-    } catch (err: any) {
-      setError(err.message || 'Error occurred');
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('Error occurred');
+      }
     } finally {
       setIsLoading(false);
     }
